@@ -1,4 +1,4 @@
-package barbearia.api.domain.controller;
+package barbearia.api.controller;
 
 import barbearia.api.domain.dto.ListaDeBarbeirosDTO;
 import barbearia.api.domain.dto.ListaDeServicosDTO;

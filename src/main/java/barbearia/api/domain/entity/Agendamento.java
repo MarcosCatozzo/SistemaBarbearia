@@ -2,6 +2,8 @@ package barbearia.api.domain.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "agendamento")
 public class Agendamento {
@@ -18,4 +20,6 @@ public class Agendamento {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "barbeiro_id")
 	private Barbeiro barbeiro;
+
+	private LocalDateTime data;
 }
