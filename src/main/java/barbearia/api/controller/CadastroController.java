@@ -6,9 +6,9 @@ import barbearia.api.domain.dto.UsuarioDTO;
 import barbearia.api.domain.entity.Barbeiro;
 import barbearia.api.domain.entity.Servico;
 import barbearia.api.domain.entity.Usuario;
-import barbearia.api.domain.service.CadastraBarbeiroService;
-import barbearia.api.domain.service.CadastraServicoService;
-import barbearia.api.domain.service.CadastraUsuarioService;
+import barbearia.api.domain.service.BarbeiroService;
+import barbearia.api.domain.service.ServicoService;
+import barbearia.api.domain.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,29 +22,29 @@ import org.springframework.web.bind.annotation.RestController;
 public class CadastroController {
 
 	@Autowired
-	public CadastraUsuarioService cadastraUsuarioService;
+	public UsuarioService usuarioService;
 
 	@Autowired
-	public CadastraBarbeiroService cadastraBarbeiroService;
+	public BarbeiroService barbeiroService;
 
 	@Autowired
-	public CadastraServicoService cadastraServicoService;
+	public ServicoService servicoService;
 
 	@PostMapping("/usuario")
-	public ResponseEntity cadastraUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO){
-		Usuario salva = cadastraUsuarioService.SalvaCadastroUsuario(usuarioDTO);
+	public ResponseEntity cadastraUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+		Usuario salva = usuarioService.salvaCadastroUsuario(usuarioDTO);
 		return ResponseEntity.ok().build();
 	}
 
 	@PostMapping("/barbeiro")
-	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto){
-		Barbeiro salva = cadastraBarbeiroService.SalvaCadastroBarbeiro(barbeiroDto);
+	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
+		Barbeiro salva = barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
 		return ResponseEntity.ok().build();
 	}
 
 	@PostMapping("/servico")
-	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto){
-		Servico salva = cadastraServicoService.CadastraServico(servicosDto);
+	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto) {
+		Servico salva = servicoService.cadastraServico(servicosDto);
 		return ResponseEntity.ok().build();
 	}
 }
