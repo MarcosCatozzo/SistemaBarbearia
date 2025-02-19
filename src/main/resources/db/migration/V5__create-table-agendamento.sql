@@ -7,4 +7,4 @@ CREATE TABLE agendamento(
     PRIMARY KEY(id),
     CONSTRAINT fk_agendamento_cliente_id FOREIGN KEY(cliente_id) REFERENCES usuarios(ID),
     CONSTRAINT fk_agendamento_barbeiro_id_id FOREIGN KEY(barbeiro_id) REFERENCES barbeiro(ID)
- );
+ )
