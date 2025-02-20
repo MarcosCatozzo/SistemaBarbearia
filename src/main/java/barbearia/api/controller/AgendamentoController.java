@@ -18,6 +18,7 @@ public class AgendamentoController {
 	private AgendamentoService agendamentoService;
 	@PostMapping
 	public ResponseEntity agendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO){
-
+		agendamentoService.agendamentoCorte(agendamentoDTO);
+		return ResponseEntity.noContent().build();
 	}
 }
