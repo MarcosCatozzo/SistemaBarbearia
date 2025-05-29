@@ -16,9 +16,11 @@ public class AgendamentoController {
 
 	@Autowired
 	private AgendamentoService agendamentoService;
+
 	@PostMapping
+	@Transactional
 	public ResponseEntity agendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO){
-		agendamentoService.agendamentoCorte(agendamentoDTO);
-		return ResponseEntity.noContent().build();
+		var agendamento = agendamentoService.agendamento(agendamentoDTO);
+		return ResponseEntity.ok().build();
 	}
 }

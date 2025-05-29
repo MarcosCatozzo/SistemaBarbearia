@@ -29,6 +29,10 @@ public class Agendamento {
 	@JoinColumn(name = "barbeiro_id")
 	private Barbeiro barbeiro;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "servico_id")
+	private Servico servico;
+
 	private LocalDateTime data;
 
 }

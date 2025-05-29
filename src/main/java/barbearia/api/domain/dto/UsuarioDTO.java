@@ -9,7 +9,7 @@ public record UsuarioDTO(
 		@NotNull
 		String cpf,
 		@NotNull
-		String email
+		String telefone
 
 ) {
 }

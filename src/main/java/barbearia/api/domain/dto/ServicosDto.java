@@ -8,8 +8,5 @@ public record ServicosDto(
 		String nomeDoServico,
 		@NotNull
 		Double valorDoServico
-//		@NotNull
-//		Boolean status
-
 ) {
 }
