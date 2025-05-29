@@ -3,6 +3,7 @@ package barbearia.api.domain.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "agendamento")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Agendamento {
 
 	@Id
@@ -27,5 +29,10 @@ public class Agendamento {
 	@JoinColumn(name = "barbeiro_id")
 	private Barbeiro barbeiro;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "servico_id")
+	private Servico servico;
+
 	private LocalDateTime data;
+
 }

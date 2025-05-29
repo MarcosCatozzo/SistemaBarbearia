@@ -10,8 +10,14 @@ public record AgendamentoDTO(
 		Long idUsuarios,
 		@NotNull
 		Long idBarbeiro,
+
+		@NotNull
+		Long idServico,
+
 		@NotNull
 		@Future
 		LocalDateTime data
+
+
 ) {
 }

@@ -2,6 +2,7 @@ package barbearia.api.controller;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
 import barbearia.api.domain.service.AgendamentoService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,11 @@ public class AgendamentoController {
 
 	@Autowired
 	private AgendamentoService agendamentoService;
-	@PostMapping
-	public ResponseEntity agendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO){
 
+	@PostMapping
+	@Transactional
+	public ResponseEntity agendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO){
+		var agendamento = agendamentoService.agendamento(agendamentoDTO);
+		return ResponseEntity.ok().build();
 	}
 }

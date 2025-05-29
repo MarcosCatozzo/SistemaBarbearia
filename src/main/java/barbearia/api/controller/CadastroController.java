@@ -33,13 +33,13 @@ public class CadastroController {
 	@PostMapping("/usuario")
 	public ResponseEntity cadastraUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
 		Usuario salva = usuarioService.salvaCadastroUsuario(usuarioDTO);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.noContent().build();
 	}
 
 	@PostMapping("/barbeiro")
 	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
 		Barbeiro salva = barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.noContent().build();
 	}
 
 	@PostMapping("/servico")
