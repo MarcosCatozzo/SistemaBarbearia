@@ -44,7 +44,11 @@ public class AgendamentoService {
 		Barbeiro barbeiro = barbeiroRepository.getReferenceById(agendamentoDTO.idBarbeiro());
 		Servico servico = servicoRepository.getReferenceById(agendamentoDTO.idServico());
 
-		Agendamento agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,agendamentoDTO.data());
+		Agendamento agendamentoMarcado = new Agendamento();
+		agendamentoMarcado.setCliente(usuario);
+		agendamentoMarcado.setBarbeiro(barbeiro);
+		agendamentoMarcado.setServico(servico);
+		agendamentoMarcado.setData(agendamentoDTO.data());
 
 		return agendamentoRepository.save(agendamentoMarcado);
 	}

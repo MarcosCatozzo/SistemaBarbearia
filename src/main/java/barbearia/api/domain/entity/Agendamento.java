@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "agendamento")
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Agendamento {
 
@@ -35,4 +33,35 @@ public class Agendamento {
 
 	private LocalDateTime data;
 
+	public Usuario getCliente() {
+		return cliente;
+	}
+
+	public Barbeiro getBarbeiro() {
+		return barbeiro;
+	}
+
+	public Servico getServico() {
+		return servico;
+	}
+
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setBarbeiro(Barbeiro barbeiro) {
+		this.barbeiro = barbeiro;
+	}
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
 }
