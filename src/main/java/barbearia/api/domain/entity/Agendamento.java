@@ -1,7 +1,6 @@
 package barbearia.api.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "agendamento")
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Agendamento {
 
@@ -33,6 +33,18 @@ public class Agendamento {
 
 	private LocalDateTime data;
 
+	public Agendamento(Long id, Usuario usuario, Barbeiro barbeiro, Servico servico, LocalDateTime dataHora) {
+		this.id = id;
+		this.cliente = usuario;
+		this.barbeiro = barbeiro;
+		this.servico = servico;
+		this.data = dataHora;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 	public Usuario getCliente() {
 		return cliente;
 	}
@@ -47,21 +59,5 @@ public class Agendamento {
 
 	public LocalDateTime getData() {
 		return data;
-	}
-
-	public void setCliente(Usuario cliente) {
-		this.cliente = cliente;
-	}
-
-	public void setBarbeiro(Barbeiro barbeiro) {
-		this.barbeiro = barbeiro;
-	}
-
-	public void setServico(Servico servico) {
-		this.servico = servico;
-	}
-
-	public void setData(LocalDateTime data) {
-		this.data = data;
 	}
 }

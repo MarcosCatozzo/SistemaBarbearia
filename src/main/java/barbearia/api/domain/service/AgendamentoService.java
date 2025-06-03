@@ -27,16 +27,16 @@ public class AgendamentoService {
 	@Autowired
 	public AgendamentoRepository agendamentoRepository;
 
-	public Agendamento agendamento(AgendamentoDTO agendamentoDTO){
-		if(!usuarioRepository.existsById(agendamentoDTO.idUsuarios())){
+	public DetalheAgendamentoDTO agendamento(AgendamentoDTO agendamentoDTO) {
+		if (!usuarioRepository.existsById(agendamentoDTO.idUsuarios())) {
 			throw new RuntimeException("Usuario não cadastrado");
 		}
 
-		if (!barbeiroRepository.existsById(agendamentoDTO.idBarbeiro())){
+		if (!barbeiroRepository.existsById(agendamentoDTO.idBarbeiro())) {
 			throw new RuntimeException("Barbeiro não cadastrado");
 		}
 
-		if (!servicoRepository.existsById(agendamentoDTO.idServico())){
+		if (!servicoRepository.existsById(agendamentoDTO.idServico())) {
 			throw new RuntimeException("Servico nao encontrado");
 		}
 
@@ -44,12 +44,10 @@ public class AgendamentoService {
 		Barbeiro barbeiro = barbeiroRepository.getReferenceById(agendamentoDTO.idBarbeiro());
 		Servico servico = servicoRepository.getReferenceById(agendamentoDTO.idServico());
 
-		Agendamento agendamentoMarcado = new Agendamento();
-		agendamentoMarcado.setCliente(usuario);
-		agendamentoMarcado.setBarbeiro(barbeiro);
-		agendamentoMarcado.setServico(servico);
-		agendamentoMarcado.setData(agendamentoDTO.data());
+		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,agendamentoDTO.data());
 
-		return agendamentoRepository.save(agendamentoMarcado);
+		agendamentoRepository.save(agendamentoMarcado);
+
+		return new DetalheAgendamentoDTO(agendamentoMarcado);
 	}
 }
