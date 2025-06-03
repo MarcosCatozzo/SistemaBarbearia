@@ -1,6 +1,7 @@
 package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
+import barbearia.api.domain.dto.DetalheAgendamentoDTO;
 import barbearia.api.domain.entity.Agendamento;
 import barbearia.api.domain.entity.Barbeiro;
 import barbearia.api.domain.entity.Servico;
