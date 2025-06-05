@@ -35,4 +35,8 @@ public class Servico {
 	public Double getValorDoServico() {
 		return valorDoServico;
 	}
+
+	public Long getId() {
+		return id;
+	}
 }
