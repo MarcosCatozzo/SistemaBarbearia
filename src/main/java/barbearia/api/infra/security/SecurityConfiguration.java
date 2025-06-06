@@ -1,4 +1,4 @@
-package barbearia.api.infra;
+package barbearia.api.infra.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
