@@ -42,4 +42,8 @@ public class Usuario {
 	public String getTelefone() {
 		return telefone;
 	}
+
+	public Long getId() {
+		return id;
+	}
 }

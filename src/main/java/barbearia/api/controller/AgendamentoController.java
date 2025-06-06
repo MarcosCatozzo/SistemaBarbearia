@@ -22,6 +22,6 @@ public class AgendamentoController {
 	@Transactional
 	public ResponseEntity agendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO){
 		var agendamento = agendamentoService.agendamento(agendamentoDTO);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(agendamento);
 	}
 }

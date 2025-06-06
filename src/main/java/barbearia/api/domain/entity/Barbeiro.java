@@ -53,4 +53,8 @@ public class Barbeiro {
 	public String getTelefone() {
 		return telefone;
 	}
+
+	public Long getId() {
+		return id;
+	}
 }
