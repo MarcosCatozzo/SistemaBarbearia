@@ -1,4 +1,4 @@
-package barbearia.api.infra;
+package barbearia.api.infra.security;
 
 import barbearia.api.domain.repository.LoginRepository;
 import jakarta.servlet.FilterChain;
