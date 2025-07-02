@@ -3,7 +3,7 @@ package barbearia.api.controller;
 import barbearia.api.domain.dto.DadosLogin;
 import barbearia.api.domain.dto.TokenJWT;
 import barbearia.api.domain.entity.Login;
-import barbearia.api.service.TokenService;
+import barbearia.api.domain.service.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,17 +26,9 @@ public class AuthenticacaoController {
 
 	@PostMapping
 	public ResponseEntity athenticaUser(@RequestBody @Valid DadosLogin dadosLogin) {
-		try {
 			var authenticacaoToken = new UsernamePasswordAuthenticationToken(dadosLogin.login(), dadosLogin.senha());
 			var authentication = authenticationManager.authenticate(authenticacaoToken);
-
 			var token = tokenService.gerarToken((Login) authentication.getPrincipal());
-
 			return ResponseEntity.ok(new TokenJWT(token));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
 	}
 }

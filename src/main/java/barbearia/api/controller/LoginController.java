@@ -17,7 +17,7 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
-	@PostMapping(name = "/login")
+	@PostMapping
 	public ResponseEntity login(@RequestBody @Valid DadosLogin dadosLogin){
 		Login s = loginService.salvaDados(dadosLogin);
 		return ResponseEntity.noContent().build();

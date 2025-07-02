@@ -1,6 +1,7 @@
 package barbearia.api.infra.security;
 
 import barbearia.api.domain.repository.LoginRepository;
+import barbearia.api.domain.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import java.io.IOException;
 public class SecurityFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private barbearia.api.service.TokenService tokenService;
+	private TokenService tokenService;
 
 	@Autowired
 	private LoginRepository repository;
