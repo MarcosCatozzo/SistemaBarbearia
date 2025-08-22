@@ -1,4 +1,4 @@
-package barbearia.api.service;
+package barbearia.api.domain.service;
 
 import barbearia.api.domain.entity.Login;
 import com.auth0.jwt.JWT;
