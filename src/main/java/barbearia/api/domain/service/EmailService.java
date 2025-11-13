@@ -22,7 +22,7 @@ public class EmailService {
 
 	public void envioDeEmail(Email email) throws MessagingException{
 
-		String linkConfirmacao = "http://localhost:8080/confirmar?token=123456";
+		String linkConfirmacao = "http://localhost:8080/confirmar=true";
 
 		Context context = new Context();
 		context.setVariable("linkConfirmacao", linkConfirmacao);

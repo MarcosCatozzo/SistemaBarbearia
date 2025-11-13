@@ -49,6 +49,7 @@ public class AgendamentoService {
 
 		agendamentoRepository.save(agendamentoMarcado);
 
-		return new DetalheAgendamentoDTO(agendamentoMarcado);
+		return null;
+//		return new DetalheAgendamentoDTO(agendamentoMarcado);
 	}
 }

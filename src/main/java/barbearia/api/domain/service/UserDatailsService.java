@@ -1,6 +1,6 @@
 package barbearia.api.domain.service;
 
-import barbearia.api.domain.repository.LoginRepository;
+import barbearia.api.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 public class UserDatailsService implements UserDetailsService {
 
 	@Autowired
-	private LoginRepository loginRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		var usuario = loginRepository.findByLogin(username);
+		var usuario = usuarioRepository.findByLogin(username);
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado: " + username);
 		}

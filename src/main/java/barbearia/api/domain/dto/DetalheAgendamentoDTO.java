@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public record DetalheAgendamentoDTO(Long id, Long idUsuario, Long idBarbeiro, Long idServico, LocalDateTime data){
 
-	public DetalheAgendamentoDTO(Agendamento agendamento){
-		this(agendamento.getId(), agendamento.getCliente().getId(), agendamento.getBarbeiro().getId(), agendamento.getServico().getId(), agendamento.getData());
-	}
+//	public DetalheAgendamentoDTO(Agendamento agendamento){
+//		this(agendamento.getId(), agendamento.getCliente().getId(), agendamento.getBarbeiro().getId(), agendamento.getServico().getId(), agendamento.getData());
+//	}
 }

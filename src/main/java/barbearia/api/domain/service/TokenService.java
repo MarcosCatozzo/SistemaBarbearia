@@ -1,12 +1,12 @@
 package barbearia.api.domain.service;
 
-import barbearia.api.domain.entity.Login;
+import barbearia.api.domain.entity.Usuario;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.auth0.jwt.algorithms.Algorithm;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class TokenService {
 
 	private static final String ISSUER = "";
 
-	public String gerarToken(Login login) {
+	public String gerarToken(Usuario login) {
 		try {
 			var algoritmo = Algorithm.HMAC256(SECRET);
 			return JWT.create()

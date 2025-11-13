@@ -3,9 +3,6 @@ package barbearia.api.controller;
 import barbearia.api.domain.dto.BarbeiroDto;
 import barbearia.api.domain.dto.ServicosDto;
 import barbearia.api.domain.dto.UsuarioDTO;
-import barbearia.api.domain.entity.Barbeiro;
-import barbearia.api.domain.entity.Servico;
-import barbearia.api.domain.entity.Usuario;
 import barbearia.api.domain.service.BarbeiroService;
 import barbearia.api.domain.service.ServicoService;
 import barbearia.api.domain.service.UsuarioService;
@@ -32,19 +29,19 @@ public class CadastroController {
 
 	@PostMapping("/usuario")
 	public ResponseEntity cadastraUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
-		Usuario salva = usuarioService.salvaCadastroUsuario(usuarioDTO);
+		usuarioService.salvaCadastroUsuario(usuarioDTO);
 		return ResponseEntity.noContent().build();
 	}
 
-	@PostMapping("/barbeiro")
-	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
-		Barbeiro salva = barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
-		return ResponseEntity.noContent().build();
-	}
-
-	@PostMapping("/servico")
-	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto) {
-		Servico salva = servicoService.cadastraServico(servicosDto);
-		return ResponseEntity.ok().build();
-	}
+//	@PostMapping("/barbeiro")
+//	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
+//		barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
+//		return ResponseEntity.noContent().build();
+//	}
+//
+//	@PostMapping("/servico")
+//	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto) {
+//		servicoService.cadastraServico(servicosDto);
+//		return ResponseEntity.ok().build();
+//	}
 }
