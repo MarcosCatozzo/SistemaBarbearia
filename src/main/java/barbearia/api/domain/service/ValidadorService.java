@@ -1,5 +1,6 @@
 package barbearia.api.domain.service;
 
+import barbearia.api.domain.repository.BarbeiroRepository;
 import barbearia.api.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +15,25 @@ public class ValidadorService {
 	@Autowired
 	public UsuarioRepository usuarioRepository;
 
-	public Boolean validateOfPassword(String senha, String email) {
+	@Autowired
+	public BarbeiroRepository barbeiroRepository;
+
+	public Boolean validateOfPasswordUser(String senha, String email) {
 
 		UserDetails confirmaDados = usuarioRepository.findByLogin(email);
+
+		String password = confirmaDados.getPassword();
+
+		Boolean isValid = crypt.matches(senha, password);
+		if (!isValid) {
+			throw new RuntimeException("A senha está incorreta!");
+		}
+		return true;
+	}
+
+	public Boolean validateOfPasswordBarber(String senha, String email) {
+
+		UserDetails confirmaDados = barbeiroRepository.findByLogin(email);
 
 		String password = confirmaDados.getPassword();
 

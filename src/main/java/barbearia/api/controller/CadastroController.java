@@ -33,11 +33,11 @@ public class CadastroController {
 		return ResponseEntity.noContent().build();
 	}
 
-//	@PostMapping("/barbeiro")
-//	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
-//		barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
-//		return ResponseEntity.noContent().build();
-//	}
+	@PostMapping("/barbeiro")
+	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
+		barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
+		return ResponseEntity.noContent().build();
+	}
 //
 //	@PostMapping("/servico")
 //	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto) {

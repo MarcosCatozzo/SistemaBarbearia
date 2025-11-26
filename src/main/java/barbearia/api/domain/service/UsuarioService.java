@@ -33,7 +33,7 @@ public class UsuarioService {
 
 			email.envioDeEmail(confirmaEmail);
 
-			usuarioRepository.save(usuario);
+			usuarioRepository.save(usuario); //remover essa linha - usuario deve ser salvo após a confirmação do email...
 		} catch (MessagingException e) {
 			e.getMessage();
 		}
