@@ -2,7 +2,6 @@ package barbearia.api.controller;
 
 import barbearia.api.domain.dto.DadosLogin;
 import barbearia.api.domain.dto.TokenJWT;
-import barbearia.api.domain.entity.Barbeiro;
 import barbearia.api.domain.entity.Usuario;
 import barbearia.api.domain.service.TokenService;
 import barbearia.api.domain.service.ValidadorService;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Authenticacao")
-public class AuthenticacaoController {
+@RequestMapping("/authenticacao/user")
+public class AuthenticacaoUserController {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -39,17 +38,5 @@ public class AuthenticacaoController {
 			var token = tokenService.gerarTokenUser((Usuario) authentication.getPrincipal());
 
 			return ResponseEntity.ok(new TokenJWT(token));
-	}
-
-	@PostMapping
-	public ResponseEntity athenticaBarber(@RequestBody @Valid DadosLogin dadosLogin) {
-
-		validadorService.validateOfPasswordBarber(dadosLogin.senha(), dadosLogin.login());
-
-		var authenticacaoToken = new UsernamePasswordAuthenticationToken(dadosLogin.login(), dadosLogin.senha());
-		var authentication = authenticationManager.authenticate(authenticacaoToken);
-		var token = tokenService.gerarTokenBarber((Barbeiro) authentication.getPrincipal());
-
-		return ResponseEntity.ok(new TokenJWT(token));
 	}
 }
