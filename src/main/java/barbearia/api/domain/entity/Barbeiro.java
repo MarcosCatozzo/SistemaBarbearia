@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "barbeiro")
+@Table(name = "barbeiros")
 public class Barbeiro implements UserDetails {
 	public Barbeiro(){
 

@@ -26,14 +26,14 @@ public class BarbeiroService {
 
 	public void salvaCadastroBarbeiro(BarbeiroDto barbeiroDto){
 		try {
-			Barbeiro barbeiro = new Barbeiro();
+			Barbeiro barbeiro = new Barbeiro(barbeiroDto);
 			barbeiro.setSenha(passwordEncoder.encode(barbeiroDto.senha()));
 
 			Email email = new Email(barbeiroDto.login(), "Cadastro Realizado!");
 
 			emailService.envioDeEmail(email);
 
-			barbeiroRepository.save(new Barbeiro(barbeiroDto));
+			barbeiroRepository.save(barbeiro);
 		}catch (MessagingException e){
 			e.getMessage();
 		}

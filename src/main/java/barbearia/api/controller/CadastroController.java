@@ -33,7 +33,7 @@ public class CadastroController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@PostMapping("/barbeiro")
+	@PostMapping("/barbeiros")
 	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
 		barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
 		return ResponseEntity.noContent().build();
