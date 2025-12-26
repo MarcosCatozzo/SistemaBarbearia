@@ -38,10 +38,10 @@ public class CadastroController {
 		barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
 		return ResponseEntity.noContent().build();
 	}
-//
-//	@PostMapping("/servico")
-//	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto) {
-//		servicoService.cadastraServico(servicosDto);
-//		return ResponseEntity.ok().build();
-//	}
+
+	@PostMapping("/servicos")
+	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto) {
+		servicoService.cadastraServico(servicosDto);
+		return ResponseEntity.ok().build();
+	}
 }
