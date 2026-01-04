@@ -35,16 +35,23 @@ public class Barbeiro implements UserDetails {
 	@Column(name = "senha")
 	private String senha;
 
+	@Column(name = "cpf")
+	private String cpf;
 
 	public Barbeiro(BarbeiroDto barbeiroDto) {
 		this.nome = barbeiroDto.nome();
 		this.login = barbeiroDto.login();
 		this.telefone = barbeiroDto.telefone();
 		this.senha = barbeiroDto.senha();
+		this.cpf = barbeiroDto.cpf();
 	}
 
 	public String getNome() {
 		return nome;
+	}
+
+	public String getCpf(){
+		return cpf;
 	}
 
 	public String getLogin() {

@@ -13,6 +13,8 @@ public record BarbeiroDto(
 		@NotNull
 		String login,
 		@NotBlank
-		String telefone
+		String telefone,
+		@NotBlank
+		String cpf
 ) {
 }

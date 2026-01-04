@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Servicos")
+@Table(name = "servicos")
 public class Servico {
 
 	public Servico() {
@@ -17,23 +17,31 @@ public class Servico {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "NOME_SERVICO")
-	private String nomeDoServico;
+	@Column(name = "nome_servico")
+	private String nomeServico;
 
-	@Column(name = "VALOR")
-	private Double valorDoServico;
+	@Column(name = "valor_servico")
+	private Double valorServico;
+
+	@Column(name = "status")
+	private Boolean status;
 
 	public Servico(ServicosDto servicosDto) {
-		this.nomeDoServico = servicosDto.nomeDoServico();
-		this.valorDoServico = servicosDto.valorDoServico();
+		this.nomeServico = servicosDto.nomeServico();
+		this.valorServico = servicosDto.valorServico();
+		this.status = servicosDto.status();
 	}
 
 	public String getNomeDoServico() {
-		return nomeDoServico;
+		return nomeServico;
 	}
 
 	public Double getValorDoServico() {
-		return valorDoServico;
+		return valorServico;
+	}
+
+	public Boolean getStatus(){
+		return status;
 	}
 
 	public Long getId() {

@@ -26,7 +26,7 @@ public class ListagemController {
 
 	@GetMapping("/servicos")
 	public ResponseEntity<List<ListaDeServicosDTO>> listarServicos(){
-		List listagemServicos = servicoService.listagemDeServico();
+		List listagemServicos = servicoService.listaServicos();
 		return ResponseEntity.ok(listagemServicos);
 	}
 

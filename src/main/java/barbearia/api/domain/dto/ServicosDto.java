@@ -5,8 +5,10 @@ import jakarta.validation.constraints.NotNull;
 
 public record ServicosDto(
 		@NotBlank
-		String nomeDoServico,
+		String nomeServico,
 		@NotNull
-		Double valorDoServico
+		Double valorServico,
+		@NotNull
+		Boolean status
 ) {
 }
