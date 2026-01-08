@@ -1,9 +1,6 @@
 package barbearia.api.domain.dto;
 
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
 
 public record AgendamentoDTO(
 		@NotNull
@@ -15,9 +12,9 @@ public record AgendamentoDTO(
 		Long idServico,
 
 		@NotNull
-		@Future
-		LocalDateTime data
+		Long idHorario,
 
-
+		@NotNull
+		Long idDiaSemana
 ) {
 }

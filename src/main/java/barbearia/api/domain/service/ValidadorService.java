@@ -1,5 +1,7 @@
 package barbearia.api.domain.service;
 
+import barbearia.api.domain.dto.AgendamentoDTO;
+import barbearia.api.domain.repository.AgendamentoRepository;
 import barbearia.api.domain.repository.BarbeiroRepository;
 import barbearia.api.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class ValidadorService {
 
 	@Autowired
 	public BarbeiroRepository barbeiroRepository;
+
+	@Autowired
+	public AgendamentoRepository agendamentoRepository;
 
 	public Boolean validateOfPasswordUser(String senha, String email) {
 
@@ -42,5 +47,11 @@ public class ValidadorService {
 			throw new RuntimeException("A senha está incorreta!");
 		}
 		return true;
+	}
+
+	public void validaAgendamentoBarbeiro(AgendamentoDTO agendamentoDTO){
+
+
+//		return null;
 	}
 }

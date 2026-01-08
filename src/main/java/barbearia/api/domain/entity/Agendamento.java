@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @Table(name = "agendamento")
@@ -20,7 +18,7 @@ public class Agendamento {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cliente_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario cliente;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -31,14 +29,21 @@ public class Agendamento {
 	@JoinColumn(name = "servico_id")
 	private Servico servico;
 
-	private LocalDateTime data;
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dia_semana_id")
+	private DiaSemana diaDaSemana;
 
-	public Agendamento(Long id, Usuario usuario, Barbeiro barbeiro, Servico servico, LocalDateTime dataHora) {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "horario_id")
+	private Horas horario;
+
+	public Agendamento(Long id, Usuario usuario, Barbeiro barbeiro, Servico servico, DiaSemana diaDaSemana, Horas horario) {
 		this.id = id;
 		this.cliente = usuario;
 		this.barbeiro = barbeiro;
 		this.servico = servico;
-		this.data = dataHora;
+		this.diaDaSemana = diaDaSemana;
+		this.horario = horario;
 	}
 
 	public Long getId() {
@@ -57,7 +62,7 @@ public class Agendamento {
 		return servico;
 	}
 
-	public LocalDateTime getData() {
-		return data;
+	public DiaSemana getDiaDaSemana() {
+		return diaDaSemana;
 	}
 }

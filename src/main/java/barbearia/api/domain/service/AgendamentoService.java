@@ -2,14 +2,8 @@ package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
 import barbearia.api.domain.dto.DetalheAgendamentoDTO;
-import barbearia.api.domain.entity.Agendamento;
-import barbearia.api.domain.entity.Barbeiro;
-import barbearia.api.domain.entity.Servico;
-import barbearia.api.domain.entity.Usuario;
-import barbearia.api.domain.repository.AgendamentoRepository;
-import barbearia.api.domain.repository.BarbeiroRepository;
-import barbearia.api.domain.repository.ServicoRepository;
-import barbearia.api.domain.repository.UsuarioRepository;
+import barbearia.api.domain.entity.*;
+import barbearia.api.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +22,13 @@ public class AgendamentoService {
 	@Autowired
 	public AgendamentoRepository agendamentoRepository;
 
-	public DetalheAgendamentoDTO agendamento(AgendamentoDTO agendamentoDTO) {
+	@Autowired
+	public HorasRepository horasRepository;
+
+	@Autowired
+	public DiaSemanaRepository diaSemanaRepository;
+
+	public void agendamento(AgendamentoDTO agendamentoDTO) {
 		if (!usuarioRepository.existsById(agendamentoDTO.idUsuarios())) {
 			throw new RuntimeException("Usuario não cadastrado");
 		}
@@ -44,12 +44,12 @@ public class AgendamentoService {
 		Usuario usuario = usuarioRepository.getReferenceById(agendamentoDTO.idUsuarios());
 		Barbeiro barbeiro = barbeiroRepository.getReferenceById(agendamentoDTO.idBarbeiro());
 		Servico servico = servicoRepository.getReferenceById(agendamentoDTO.idServico());
+		Horas horas = horasRepository.getReferenceById(agendamentoDTO.idHorario());
+		DiaSemana diaSemana = diaSemanaRepository.getReferenceById(agendamentoDTO.idDiaSemana());
 
-		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,agendamentoDTO.data());
+		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,diaSemana,horas);
 
 		agendamentoRepository.save(agendamentoMarcado);
 
-		return null;
-//		return new DetalheAgendamentoDTO(agendamentoMarcado);
 	}
 }
