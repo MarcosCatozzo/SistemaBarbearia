@@ -23,6 +23,10 @@ public class ValidadorService {
 	@Autowired
 	public AgendamentoRepository agendamentoRepository;
 
+	public ValidadorService(BCryptPasswordEncoder crypt) {
+		this.crypt = crypt;
+	}
+
 	public Boolean validateOfPasswordUser(String senha, String email) {
 
 		UserDetails confirmaDados = usuarioRepository.findByLogin(email);
@@ -47,11 +51,5 @@ public class ValidadorService {
 			throw new RuntimeException("A senha está incorreta!");
 		}
 		return true;
-	}
-
-	public void validaAgendamentoBarbeiro(AgendamentoDTO agendamentoDTO){
-
-
-//		return null;
 	}
 }

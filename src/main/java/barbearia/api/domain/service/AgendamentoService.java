@@ -1,7 +1,6 @@
 package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
-import barbearia.api.domain.dto.DetalheAgendamentoDTO;
 import barbearia.api.domain.entity.*;
 import barbearia.api.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ public class AgendamentoService {
 	public DiaSemanaRepository diaSemanaRepository;
 
 	public void agendamento(AgendamentoDTO agendamentoDTO) {
+
 		if (!usuarioRepository.existsById(agendamentoDTO.idUsuarios())) {
 			throw new RuntimeException("Usuario não cadastrado");
 		}
@@ -37,8 +37,8 @@ public class AgendamentoService {
 			throw new RuntimeException("Barbeiro não cadastrado");
 		}
 
-		if (!servicoRepository.existsById(agendamentoDTO.idServico())) {
-			throw new RuntimeException("Servico nao encontrado");
+		if(agendamentoRepository.existsByBarbeiro_IdAndDiaDaSemana_IdAndHorario_Id(agendamentoDTO.idBarbeiro(),agendamentoDTO.idDiaSemana(), agendamentoDTO.idHorario())){
+			throw new RuntimeException("agendamento já marcado");
 		}
 
 		Usuario usuario = usuarioRepository.getReferenceById(agendamentoDTO.idUsuarios());
