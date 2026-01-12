@@ -1,6 +1,7 @@
 package barbearia.api.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "agendamento")
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Agendamento {
 
@@ -37,6 +37,8 @@ public class Agendamento {
 	@JoinColumn(name = "horario_id")
 	private Horas horario;
 
+	public Agendamento(){}
+
 	public Agendamento(Long id, Usuario usuario, Barbeiro barbeiro, Servico servico, DiaSemana diaDaSemana, Horas horario) {
 		this.id = id;
 		this.cliente = usuario;
@@ -64,5 +66,9 @@ public class Agendamento {
 
 	public DiaSemana getDiaDaSemana() {
 		return diaDaSemana;
+	}
+
+	public Horas getHorario() {
+		return horario;
 	}
 }

@@ -13,5 +13,9 @@ public class DiaSemana {
 	private Long id;
 
 	@Column(name = "dia")
-	private Long diaSemana;
+	private String dia;
+
+	public String getDia() {
+		return dia;
+	}
 }

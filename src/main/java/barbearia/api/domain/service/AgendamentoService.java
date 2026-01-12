@@ -50,6 +50,5 @@ public class AgendamentoService {
 		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,diaSemana,horas);
 
 		agendamentoRepository.save(agendamentoMarcado);
-
 	}
 }

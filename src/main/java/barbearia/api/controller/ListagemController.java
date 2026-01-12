@@ -1,11 +1,9 @@
 package barbearia.api.controller;
 
-import barbearia.api.domain.dto.ListaDeBarbeirosDTO;
-import barbearia.api.domain.dto.ListaDeServicosDTO;
-import barbearia.api.domain.dto.ListaDeUsuariosDTO;
-import barbearia.api.domain.service.BarbeiroService;
-import barbearia.api.domain.service.ServicoService;
-import barbearia.api.domain.service.UsuarioService;
+import barbearia.api.domain.dto.*;
+import barbearia.api.domain.repository.DiaSemanaRepository;
+import barbearia.api.domain.repository.HorasRepository;
+import barbearia.api.domain.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +22,12 @@ public class ListagemController {
 	@Autowired
 	public BarbeiroService barbeiroService;
 
+	@Autowired
+	public DiasDaSemanaService diasDaSemanaService;
+
+	@Autowired
+	public HorarioService horarioService;
+
 	@GetMapping("/servicos")
 	public ResponseEntity<List<ListaDeServicosDTO>> listarServicos(){
 		List listagemServicos = servicoService.listaServicos();
@@ -40,5 +44,17 @@ public class ListagemController {
 	public ResponseEntity<List<ListaDeBarbeirosDTO>> listarBarbeiros(){
 		List listagemBarbeiros = barbeiroService.listagemBarbeiro();
 		return ResponseEntity.ok(listagemBarbeiros);
+	}
+
+	@GetMapping("/dia_semana")
+	public ResponseEntity<List<ListaDiaSemana>> ListaDiaSemana(){
+		List diasDaSemana = diasDaSemanaService.listagemDiaSemana();
+		return ResponseEntity.ok(diasDaSemana);
+	}
+
+	@GetMapping("/horarios")
+	public ResponseEntity<List<ListaHorarios>> listarHorarios(){
+		List listaDeHorarios = horarioService.listaDeHorarios();
+		return ResponseEntity.ok(listaDeHorarios);
 	}
 }

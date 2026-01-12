@@ -3,6 +3,8 @@ package barbearia.api.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalTime;
+
 @Table(name = "horarios")
 @Data
 @Entity
@@ -14,5 +16,9 @@ public class Horas {
 	private Long id;
 
 	@Column(name = "horario")
-	private Long horarioId;
+	private LocalTime horario;
+
+	public LocalTime getHorario() {
+		return horario;
+	}
 }
