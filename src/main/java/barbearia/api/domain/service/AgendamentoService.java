@@ -1,10 +1,14 @@
 package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
+import barbearia.api.domain.dto.ListaAgendadosBarbeiro;
+import barbearia.api.domain.dto.ListaAgendamentosUsuario;
 import barbearia.api.domain.entity.*;
 import barbearia.api.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AgendamentoService {
@@ -50,5 +54,22 @@ public class AgendamentoService {
 		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,diaSemana,horas);
 
 		agendamentoRepository.save(agendamentoMarcado);
+	}
+
+	public List<ListaAgendamentosUsuario> listaDeAgendamentosUsuario(){
+		List listaAgendamentos = agendamentoRepository.findAll()
+				.stream()
+				.map(ListaAgendamentosUsuario::new)
+				.toList();
+
+		return listaAgendamentos;
+	}
+
+	public List<ListaAgendamentosUsuario> agendamentoBarbeiro(Long id){
+		List detalhamento = agendamentoRepository.findAllByBarbeiroId(id)
+				.stream()
+				.map(ListaAgendadosBarbeiro::new)
+				.toList();
+		return detalhamento;
 	}
 }
