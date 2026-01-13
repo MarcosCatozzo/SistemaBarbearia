@@ -3,7 +3,6 @@ package barbearia.api.domain.service;
 import barbearia.api.domain.dto.Email;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class EmailService {
 
 	public void envioDeEmail(Email email) throws MessagingException{
 
-		String linkConfirmacao = "http://localhost:8080/confirmar?token=123456";
+		String linkConfirmacao = "http://localhost:8080/confirmar=true";
 
 		Context context = new Context();
 		context.setVariable("linkConfirmacao", linkConfirmacao);

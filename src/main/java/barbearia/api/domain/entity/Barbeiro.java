@@ -2,59 +2,102 @@ package barbearia.api.domain.entity;
 
 import barbearia.api.domain.dto.BarbeiroDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "barbeiro")
-public class Barbeiro {
+@Table(name = "barbeiros")
+public class Barbeiro implements UserDetails {
 	public Barbeiro(){
 
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
+	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "NOME")
+	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "EMAIL")
-	private String email;
+	@Column(name = "email")
+	private String login;
 
-	@Column(name = "CPF")
-	private String cpf;
-
-	@Column(name= "TELEFONE")
+	@Column(name= "telefone")
 	private String telefone;
+
+	@Column(name = "senha")
+	private String senha;
+
+	@Column(name = "cpf")
+	private String cpf;
 
 	public Barbeiro(BarbeiroDto barbeiroDto) {
 		this.nome = barbeiroDto.nome();
-		this.cpf = barbeiroDto.cpf();
-		this.email = barbeiroDto.email();
+		this.login = barbeiroDto.login();
 		this.telefone = barbeiroDto.telefone();
+		this.senha = barbeiroDto.senha();
+		this.cpf = barbeiroDto.cpf();
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCpf(){
+		return cpf;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getLogin() {
+		return login;
 	}
 
 	public String getTelefone() {
 		return telefone;
 	}
 
+	public String getSenha(){
+		return senha;
+	}
+
+	public void setSenha(String senha){
+		this.senha = senha;
+	}
+
 	public Long getId() {
 		return id;
 	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+	@Override
+	public String getPassword() {
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {return true;}
+
+	@Override
+	public boolean isAccountNonLocked() {return true;}
+
+	@Override
+	public boolean isCredentialsNonExpired() {return true;}
+
+	@Override
+	public boolean isEnabled() {return true;}
 }

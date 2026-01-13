@@ -19,7 +19,7 @@ public class ServicoService {
 		return servicoRepository.save(new Servico(servicosDto));
 	}
 
-	public List<ListaDeServicosDTO> listagemDeServico(){
+	public List<ListaDeServicosDTO> listaServicos(){
 		return servicoRepository.findAll().stream().map(ListaDeServicosDTO::new).toList();
 	}
 }

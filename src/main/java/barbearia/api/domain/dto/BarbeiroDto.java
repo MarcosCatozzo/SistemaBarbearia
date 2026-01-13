@@ -8,11 +8,13 @@ public record BarbeiroDto(
 		@NotBlank
 		String nome,
 		@NotBlank
-		String cpf,
+		String senha,
 		@Email
 		@NotNull
-		String email,
+		String login,
 		@NotBlank
-		String telefone
+		String telefone,
+		@NotBlank
+		String cpf
 ) {
 }

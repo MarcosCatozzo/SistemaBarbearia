@@ -1,17 +1,14 @@
 package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
-import barbearia.api.domain.dto.DetalheAgendamentoDTO;
-import barbearia.api.domain.entity.Agendamento;
-import barbearia.api.domain.entity.Barbeiro;
-import barbearia.api.domain.entity.Servico;
-import barbearia.api.domain.entity.Usuario;
-import barbearia.api.domain.repository.AgendamentoRepository;
-import barbearia.api.domain.repository.BarbeiroRepository;
-import barbearia.api.domain.repository.ServicoRepository;
-import barbearia.api.domain.repository.UsuarioRepository;
+import barbearia.api.domain.dto.ListaAgendadosBarbeiro;
+import barbearia.api.domain.dto.ListaAgendamentosUsuario;
+import barbearia.api.domain.entity.*;
+import barbearia.api.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AgendamentoService {
@@ -28,7 +25,14 @@ public class AgendamentoService {
 	@Autowired
 	public AgendamentoRepository agendamentoRepository;
 
-	public DetalheAgendamentoDTO agendamento(AgendamentoDTO agendamentoDTO) {
+	@Autowired
+	public HorasRepository horasRepository;
+
+	@Autowired
+	public DiaSemanaRepository diaSemanaRepository;
+
+	public void agendamento(AgendamentoDTO agendamentoDTO) {
+
 		if (!usuarioRepository.existsById(agendamentoDTO.idUsuarios())) {
 			throw new RuntimeException("Usuario não cadastrado");
 		}
@@ -37,18 +41,35 @@ public class AgendamentoService {
 			throw new RuntimeException("Barbeiro não cadastrado");
 		}
 
-		if (!servicoRepository.existsById(agendamentoDTO.idServico())) {
-			throw new RuntimeException("Servico nao encontrado");
+		if(agendamentoRepository.existsByBarbeiro_IdAndDiaDaSemana_IdAndHorario_Id(agendamentoDTO.idBarbeiro(),agendamentoDTO.idDiaSemana(), agendamentoDTO.idHorario())){
+			throw new RuntimeException("agendamento já marcado");
 		}
 
 		Usuario usuario = usuarioRepository.getReferenceById(agendamentoDTO.idUsuarios());
 		Barbeiro barbeiro = barbeiroRepository.getReferenceById(agendamentoDTO.idBarbeiro());
 		Servico servico = servicoRepository.getReferenceById(agendamentoDTO.idServico());
+		Horas horas = horasRepository.getReferenceById(agendamentoDTO.idHorario());
+		DiaSemana diaSemana = diaSemanaRepository.getReferenceById(agendamentoDTO.idDiaSemana());
 
-		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,agendamentoDTO.data());
+		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,diaSemana,horas);
 
 		agendamentoRepository.save(agendamentoMarcado);
+	}
 
-		return new DetalheAgendamentoDTO(agendamentoMarcado);
+	public List<ListaAgendamentosUsuario> listaDeAgendamentosUsuario(){
+		List listaAgendamentos = agendamentoRepository.findAll()
+				.stream()
+				.map(ListaAgendamentosUsuario::new)
+				.toList();
+
+		return listaAgendamentos;
+	}
+
+	public List<ListaAgendamentosUsuario> agendamentoBarbeiro(Long id){
+		List detalhamento = agendamentoRepository.findAllByBarbeiroId(id)
+				.stream()
+				.map(ListaAgendadosBarbeiro::new)
+				.toList();
+		return detalhamento;
 	}
 }
