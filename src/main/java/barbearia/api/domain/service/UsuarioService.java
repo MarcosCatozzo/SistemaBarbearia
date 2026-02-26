@@ -1,5 +1,6 @@
 package barbearia.api.domain.service;
 
+import barbearia.api.domain.Tipo;
 import barbearia.api.domain.dto.Email;
 import barbearia.api.domain.dto.ListaDeUsuariosDTO;
 import barbearia.api.domain.dto.UsuarioDTO;
@@ -32,6 +33,12 @@ public class UsuarioService {
 			Email confirmaEmail = new Email(usuario.getLogin(), "Cadastro Realizado");
 
 			email.envioDeEmail(confirmaEmail);
+
+			if(usuario.getTipo() == Tipo.CLIENTE){
+				usuario.setTipo(Tipo.CLIENTE);
+			}else {
+				usuario.setTipo(Tipo.BARBEIRO);
+			}
 
 			usuarioRepository.save(usuario); //remover essa linha - usuario deve ser salvo após a confirmação do email...
 		} catch (MessagingException e) {
