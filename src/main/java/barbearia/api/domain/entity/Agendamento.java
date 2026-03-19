@@ -1,5 +1,6 @@
 package barbearia.api.domain.entity;
 
+import barbearia.api.domain.dto.AgendamentoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,63 +13,38 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Agendamento {
 
+	public Agendamento(){}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	public Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario_id")
-	private Usuario cliente;
+	@ManyToOne
+	@JoinColumn(name = "usuario_id", nullable = false)
+	public Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "barbeiro_id")
-	private Barbeiro barbeiro;
+	@ManyToOne
+	@JoinColumn(name = "barbeiro_id", nullable = false)
+	public Usuario barbeiro;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "servico_id")
-	private Servico servico;
+	@ManyToOne
+	@JoinColumn(name = "servico_id", nullable = false)
+	public Servico servico;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dia_semana_id")
-	private DiaSemana diaDaSemana;
+	@ManyToOne
+	@JoinColumn(name = "diaSemana_id", nullable = false)
+	public DiaSemana diaSemana;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "horario_id")
-	private Horas horario;
+	@ManyToOne
+	@JoinColumn(name = "horario_id", nullable = false)
+	public Horas horario;
 
-	public Agendamento(){}
-
-	public Agendamento(Long id, Usuario usuario, Barbeiro barbeiro, Servico servico, DiaSemana diaDaSemana, Horas horario) {
+	public Agendamento( Long id, Usuario cliente, Usuario barbeiro, Servico servico, DiaSemana diaSemana, Horas horas) {
 		this.id = id;
-		this.cliente = usuario;
+		this.usuario = cliente;
 		this.barbeiro = barbeiro;
 		this.servico = servico;
-		this.diaDaSemana = diaDaSemana;
-		this.horario = horario;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public Usuario getCliente() {
-		return cliente;
-	}
-
-	public Barbeiro getBarbeiro() {
-		return barbeiro;
-	}
-
-	public Servico getServico() {
-		return servico;
-	}
-
-	public DiaSemana getDiaDaSemana() {
-		return diaDaSemana;
-	}
-
-	public Horas getHorario() {
-		return horario;
+		this.diaSemana = diaSemana;
+		this.horario = horas;
 	}
 }

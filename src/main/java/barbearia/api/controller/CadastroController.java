@@ -1,9 +1,9 @@
 package barbearia.api.controller;
 
-import barbearia.api.domain.dto.BarbeiroDto;
+//import barbearia.api.domain.dto.BarbeiroDto;
 import barbearia.api.domain.dto.ServicosDto;
 import barbearia.api.domain.dto.UsuarioDTO;
-import barbearia.api.domain.service.BarbeiroService;
+//import barbearia.api.domain.service.BarbeiroService;
 import barbearia.api.domain.service.ServicoService;
 import barbearia.api.domain.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -20,9 +20,6 @@ public class CadastroController {
 
 	@Autowired
 	public UsuarioService usuarioService;
-
-	@Autowired
-	public BarbeiroService barbeiroService;
 
 	@Autowired
 	public ServicoService servicoService;

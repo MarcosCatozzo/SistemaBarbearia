@@ -19,14 +19,12 @@ public class ListagemController {
 	@Autowired
 	public UsuarioService usuarioService;
 	@Autowired
-	public BarbeiroService barbeiroService;
-	@Autowired
-	public DiasDaSemanaService diasDaSemanaService;
+	public DiasSemanaService diasSemanaService;
 	@Autowired
 	public HorarioService horarioService;
 
-	@Autowired
-	public AgendamentoService agendamentoService;
+//	@Autowired
+//	public AgendamentoService agendamentoService;
 
 	@GetMapping("/servicos")
 	public ResponseEntity<List<ListaDeServicosDTO>> listarServicos(){
@@ -40,15 +38,9 @@ public class ListagemController {
 		return ResponseEntity.ok(listagemUsuarios);
 	}
 
-	@GetMapping("/barbeiros")
-	public ResponseEntity<List<ListaDeBarbeirosDTO>> listarBarbeiros(){
-		List listagemBarbeiros = barbeiroService.listagemBarbeiro();
-		return ResponseEntity.ok(listagemBarbeiros);
-	}
-
 	@GetMapping("/dia_semana")
 	public ResponseEntity<List<ListaDiaSemana>> ListaDiaSemana(){
-		List diasDaSemana = diasDaSemanaService.listagemDiaSemana();
+		List diasDaSemana = diasSemanaService.listagemDiaSemana();
 		return ResponseEntity.ok(diasDaSemana);
 	}
 
@@ -58,15 +50,15 @@ public class ListagemController {
 		return ResponseEntity.ok(listaDeHorarios);
 	}
 
-	@GetMapping("/agendamentos")
-	public ResponseEntity<List<ListaAgendamentosUsuario>> listarAgendamentos(){
-		List listaAgendamentoUsuario = agendamentoService.listaDeAgendamentosUsuario();
-		return ResponseEntity.ok(listaAgendamentoUsuario);
-	}
-
-	@GetMapping("/agendado/{id}")
-	public ResponseEntity<List<ListaAgendadosBarbeiro>> listaAgendados(@PathVariable Long id){
-		List agendadosBarbeiro = agendamentoService.agendamentoBarbeiro(id);
-		return ResponseEntity.ok(agendadosBarbeiro);
-	}
+//	@GetMapping("/agendamentos")
+//	public ResponseEntity<List<ListaAgendamentosUsuario>> listarAgendamentos(){
+//		List listaAgendamentoUsuario = agendamentoService.listaDeAgendamentosUsuario();
+//		return ResponseEntity.ok(listaAgendamentoUsuario);
+//	}
+//
+//	@GetMapping("/agendado/{id}")
+//	public ResponseEntity<List<ListaAgendadosBarbeiro>> listaAgendados(@PathVariable Long id){
+//		List agendadosBarbeiro = agendamentoService.agendamentoBarbeiro(id);
+//		return ResponseEntity.ok(agendadosBarbeiro);
+//	}
 }

@@ -15,11 +15,17 @@ public class ServicoService {
 	@Autowired
 	private ServicoRepository servicoRepository;
 
-	public Servico cadastraServico(ServicosDto servicosDto){
+	public Servico cadastraServico(ServicosDto servicosDto) {
 		return servicoRepository.save(new Servico(servicosDto));
 	}
 
-	public List<ListaDeServicosDTO> listaServicos(){
+	public List<ListaDeServicosDTO> listaServicos() {
 		return servicoRepository.findAll().stream().map(ListaDeServicosDTO::new).toList();
+	}
+
+	public Servico validaServico(Long id) {
+		Servico servico = servicoRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("ID DO SERVICO NÃO LOCALIZADO!!"));
+		return servico;
 	}
 }

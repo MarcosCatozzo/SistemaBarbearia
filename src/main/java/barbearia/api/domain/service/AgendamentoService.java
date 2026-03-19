@@ -1,20 +1,13 @@
 package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
-import barbearia.api.domain.dto.ListaAgendadosBarbeiro;
-import barbearia.api.domain.dto.ListaAgendamentosUsuario;
 import barbearia.api.domain.entity.*;
 import barbearia.api.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class AgendamentoService {
-
-	@Autowired
-	public BarbeiroRepository barbeiroRepository;
 
 	@Autowired
 	public UsuarioRepository usuarioRepository;
@@ -23,53 +16,48 @@ public class AgendamentoService {
 	public ServicoRepository servicoRepository;
 
 	@Autowired
+	public HorarioService horarioService;
+
+	@Autowired
+	public ServicoService servicoService;
+
+	@Autowired
 	public AgendamentoRepository agendamentoRepository;
 
 	@Autowired
-	public HorasRepository horasRepository;
+	public DiasSemanaService diasSemanaService;
 
 	@Autowired
 	public DiaSemanaRepository diaSemanaRepository;
 
 	public void agendamento(AgendamentoDTO agendamentoDTO) {
 
-		if (!usuarioRepository.existsById(agendamentoDTO.idUsuarios())) {
-			throw new RuntimeException("Usuario não cadastrado");
-		}
+		Usuario cliente = usuarioRepository.findById(agendamentoDTO.idUsuarios())
+				.orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
-		if (!barbeiroRepository.existsById(agendamentoDTO.idBarbeiro())) {
-			throw new RuntimeException("Barbeiro não cadastrado");
-		}
+		Usuario barbeiro = usuarioRepository.findById(agendamentoDTO.idBarbeiro())
+				.orElseThrow(() -> new RuntimeException("Barbeiro não encontrado"));
 
-		if(agendamentoRepository.existsByBarbeiro_IdAndDiaDaSemana_IdAndHorario_Id(agendamentoDTO.idBarbeiro(),agendamentoDTO.idDiaSemana(), agendamentoDTO.idHorario())){
+		Servico servico = servicoService.validaServico(agendamentoDTO.idServico());
+		Horas horario = horarioService.validaHorario(agendamentoDTO.idHorario());
+		DiaSemana diaSemana = diasSemanaService.validaDiaSemana(agendamentoDTO.idDiaSemana());
+
+		if(agendamentoRepository.existsByUsuario_IdAndDiaSemana_IdAndHorario_Id(agendamentoDTO.idBarbeiro(),agendamentoDTO.idDiaSemana(), agendamentoDTO.idHorario())){
 			throw new RuntimeException("agendamento já marcado");
 		}
-
-		Usuario usuario = usuarioRepository.getReferenceById(agendamentoDTO.idUsuarios());
-		Barbeiro barbeiro = barbeiroRepository.getReferenceById(agendamentoDTO.idBarbeiro());
-		Servico servico = servicoRepository.getReferenceById(agendamentoDTO.idServico());
-		Horas horas = horasRepository.getReferenceById(agendamentoDTO.idHorario());
-		DiaSemana diaSemana = diaSemanaRepository.getReferenceById(agendamentoDTO.idDiaSemana());
-
-		var agendamentoMarcado = new Agendamento(null,usuario,barbeiro,servico,diaSemana,horas);
+		Agendamento agendamentoMarcado = new Agendamento(null,cliente,barbeiro,servico,diaSemana,horario);
 
 		agendamentoRepository.save(agendamentoMarcado);
 	}
 
-	public List<ListaAgendamentosUsuario> listaDeAgendamentosUsuario(){
-		List listaAgendamentos = agendamentoRepository.findAll()
-				.stream()
-				.map(ListaAgendamentosUsuario::new)
-				.toList();
 
-		return listaAgendamentos;
-	}
+//	public List<ListaAgendamentosUsuario> listaDeAgendamentosUsuario(){
+//		List listaAgendamentos = agendamentoRepository.findAll()
+//				.stream()
+//				.map(ListaAgendamentosUsuario::new)
+//				.toList();
+//
+//		return listaAgendamentos;
+//	}
 
-	public List<ListaAgendamentosUsuario> agendamentoBarbeiro(Long id){
-		List detalhamento = agendamentoRepository.findAllByBarbeiroId(id)
-				.stream()
-				.map(ListaAgendadosBarbeiro::new)
-				.toList();
-		return detalhamento;
-	}
 }
