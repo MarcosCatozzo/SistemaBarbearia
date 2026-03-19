@@ -4,6 +4,7 @@ import barbearia.api.domain.dto.ListaDeServicosDTO;
 import barbearia.api.domain.dto.ServicosDto;
 import barbearia.api.domain.entity.Servico;
 import barbearia.api.domain.repository.ServicoRepository;
+import barbearia.api.infra.Exceptions.validadores.ValidaUsuarioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class ServicoService {
 
 	public Servico validaServico(Long id) {
 		Servico servico = servicoRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("ID DO SERVICO NÃO LOCALIZADO!!"));
+				.orElseThrow(() -> new ValidaUsuarioException("ID DO SERVICO NÃO LOCALIZADO!!"));
 		return servico;
 	}
 }

@@ -4,8 +4,7 @@ import barbearia.api.domain.dto.AgendamentoDTO;
 import barbearia.api.domain.dto.ListaAgendamentosUsuario;
 import barbearia.api.domain.entity.*;
 import barbearia.api.domain.repository.*;
-import barbearia.api.infra.Exceptions.ValidaException;
-import jakarta.validation.Valid;
+import barbearia.api.infra.Exceptions.validadores.ValidaIdException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class AgendamentoService {
 	public void agendamento(AgendamentoDTO agendamentoDTO) {
 
 		if (Objects.equals(agendamentoDTO.idUsuarios(), agendamentoDTO.idBarbeiro())){
-			throw new ValidaException("ID DO BARBEIRO E CLIENTE NÃO PODEM SER IGUAIS! ");
+			throw new ValidaIdException("ID DO BARBEIRO E CLIENTE NÃO PODEM SER IGUAIS! ");
 		}
 
 		Usuario barbeiro = usuarioService.validaBarbeiro(agendamentoDTO.idBarbeiro());

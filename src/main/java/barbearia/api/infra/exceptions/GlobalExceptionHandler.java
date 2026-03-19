@@ -1,8 +1,8 @@
 package barbearia.api.infra.Exceptions;
 
-import jakarta.mail.MessagingException;
+import barbearia.api.infra.Exceptions.validadores.ValidaIdException;
+import barbearia.api.infra.Exceptions.validadores.ValidaUsuarioException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,9 +17,15 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.internalServerError().body(response);
 	}
 
-	@ExceptionHandler(ValidaException.class)
-	public ResponseEntity validação(ValidaException ex){
+	@ExceptionHandler(ValidaIdException.class)
+	public ResponseEntity validação(ValidaIdException ex){
 		ResponseError erro = new ResponseError(ex.getMessage(),HttpStatus.UNPROCESSABLE_ENTITY.value(),LocalDateTime.now());
 		return ResponseEntity.unprocessableEntity().body(erro);
+	}
+
+	@ExceptionHandler(ValidaUsuarioException.class)
+	public ResponseEntity validaIdBanco(ValidaUsuarioException ex){
+		ResponseError responseError = new ResponseError(ex.getMessage(),HttpStatus.NOT_FOUND.value(),LocalDateTime.now());
+		return ResponseEntity.status(404).body(responseError);
 	}
 }

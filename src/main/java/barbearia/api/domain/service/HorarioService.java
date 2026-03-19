@@ -4,6 +4,7 @@ import barbearia.api.domain.dto.ListaHorarios;
 import barbearia.api.domain.entity.Horas;
 import barbearia.api.domain.repository.AgendamentoRepository;
 import barbearia.api.domain.repository.HorasRepository;
+import barbearia.api.infra.Exceptions.validadores.ValidaUsuarioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class HorarioService {
 
 	public Horas validaHorario(Long id) {
 		Horas horario = horasRepository.findById(id).
-				orElseThrow(() -> new RuntimeException("ID DO HORARIO NÃO LOCALIZADO!!"));
+				orElseThrow(() -> new ValidaUsuarioException("ID DO HORARIO NÃO LOCALIZADO!!"));
 		return horario;
 	}
 }

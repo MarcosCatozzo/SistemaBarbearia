@@ -6,6 +6,7 @@ import barbearia.api.domain.dto.ListaDeUsuariosDTO;
 import barbearia.api.domain.dto.UsuarioDTO;
 import barbearia.api.domain.entity.Usuario;
 import barbearia.api.domain.repository.UsuarioRepository;
+import barbearia.api.infra.Exceptions.validadores.ValidaUsuarioException;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,13 +52,13 @@ public class UsuarioService {
 
 	public Usuario validaUsuario(Long id){
 		Usuario cliente = usuarioRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("ID DO CLIENTE NÃO LOCALIZADO!! "));
+				.orElseThrow(() -> new ValidaUsuarioException("ID DO CLIENTE NÃO LOCALIZADO!! "));
 		return cliente;
 	}
 
 	public Usuario validaBarbeiro(Long id){
 		Usuario barbeiro = usuarioRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("ID DO BARBEIRO NÃO LOCALIZADO!! "));
+				.orElseThrow(() -> new ValidaUsuarioException("ID DO BARBEIRO NÃO LOCALIZADO!! "));
 		return barbeiro;
 	}
 }
