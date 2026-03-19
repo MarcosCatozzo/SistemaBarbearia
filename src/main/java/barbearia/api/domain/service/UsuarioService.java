@@ -48,6 +48,18 @@ public class UsuarioService {
 	public List<ListaDeUsuariosDTO> listagemUsuarios() {
 		return usuarioRepository.findAll().stream().map(ListaDeUsuariosDTO::new).toList();
 	}
+
+	public Usuario validaUsuario(Long id){
+		Usuario cliente = usuarioRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("ID DO CLIENTE NÃO LOCALIZADO!! "));
+		return cliente;
+	}
+
+	public Usuario validaBarbeiro(Long id){
+		Usuario barbeiro = usuarioRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("ID DO BARBEIRO NÃO LOCALIZADO!! "));
+		return barbeiro;
+	}
 }
 
 

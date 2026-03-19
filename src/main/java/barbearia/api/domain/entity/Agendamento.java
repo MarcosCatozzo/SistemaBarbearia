@@ -2,13 +2,12 @@ package barbearia.api.domain.entity;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
+@Getter
+@Setter
 @Table(name = "agendamento")
 @EqualsAndHashCode(of = "id")
 public class Agendamento {
@@ -47,4 +46,53 @@ public class Agendamento {
 		this.diaSemana = diaSemana;
 		this.horario = horas;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Usuario getBarbeiro() {
+		return barbeiro;
+	}
+
+	public void setBarbeiro(Usuario barbeiro) {
+		this.barbeiro = barbeiro;
+	}
+
+	public Servico getServico() {
+		return servico;
+	}
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
+	}
+
+	public DiaSemana getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(DiaSemana diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+
+	public Horas getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Horas horario) {
+		this.horario = horario;
+	}
+
 }

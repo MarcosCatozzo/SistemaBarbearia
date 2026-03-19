@@ -23,8 +23,8 @@ public class ListagemController {
 	@Autowired
 	public HorarioService horarioService;
 
-//	@Autowired
-//	public AgendamentoService agendamentoService;
+	@Autowired
+	public AgendamentoService agendamentoService;
 
 	@GetMapping("/servicos")
 	public ResponseEntity<List<ListaDeServicosDTO>> listarServicos(){
@@ -50,12 +50,12 @@ public class ListagemController {
 		return ResponseEntity.ok(listaDeHorarios);
 	}
 
-//	@GetMapping("/agendamentos")
-//	public ResponseEntity<List<ListaAgendamentosUsuario>> listarAgendamentos(){
-//		List listaAgendamentoUsuario = agendamentoService.listaDeAgendamentosUsuario();
-//		return ResponseEntity.ok(listaAgendamentoUsuario);
-//	}
-//
+	@GetMapping("/agendamentos")
+	public ResponseEntity<List<ListaAgendamentosUsuario>> listarAgendamentos(){
+		List listaAgendamentoUsuario = agendamentoService.listaDeAgendamentosUsuario();
+		return ResponseEntity.ok(listaAgendamentoUsuario);
+	}
+
 //	@GetMapping("/agendado/{id}")
 //	public ResponseEntity<List<ListaAgendadosBarbeiro>> listaAgendados(@PathVariable Long id){
 //		List agendadosBarbeiro = agendamentoService.agendamentoBarbeiro(id);
