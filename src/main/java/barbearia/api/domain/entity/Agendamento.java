@@ -1,6 +1,5 @@
 package barbearia.api.domain.entity;
 
-import barbearia.api.domain.dto.AgendamentoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +19,7 @@ public class Agendamento {
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", nullable = false)
-	public Usuario usuario;
+	public Usuario cliente;
 
 	@ManyToOne
 	@JoinColumn(name = "barbeiro_id", nullable = false)
@@ -40,7 +39,7 @@ public class Agendamento {
 
 	public Agendamento( Long id, Usuario cliente, Usuario barbeiro, Servico servico, DiaSemana diaSemana, Horas horas) {
 		this.id = id;
-		this.usuario = cliente;
+		this.cliente = cliente;
 		this.barbeiro = barbeiro;
 		this.servico = servico;
 		this.diaSemana = diaSemana;
@@ -55,12 +54,12 @@ public class Agendamento {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getCliente() {
+		return cliente;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
 	}
 
 	public Usuario getBarbeiro() {

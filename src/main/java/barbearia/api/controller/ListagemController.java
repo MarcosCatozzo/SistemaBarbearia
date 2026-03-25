@@ -4,10 +4,7 @@ import barbearia.api.domain.dto.*;
 import barbearia.api.domain.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,14 +48,14 @@ public class ListagemController {
 	}
 
 	@GetMapping("/agendamentos")
-	public ResponseEntity<List<ListaAgendamentosUsuario>> listarAgendamentos(){
+	public ResponseEntity<List<ListaAgendamentosCliente>> listarAgendamentos(){
 		List listaAgendamentoUsuario = agendamentoService.listaDeAgendamentosUsuario();
 		return ResponseEntity.ok(listaAgendamentoUsuario);
 	}
 
-//	@GetMapping("/agendado/{id}")
-//	public ResponseEntity<List<ListaAgendadosBarbeiro>> listaAgendados(@PathVariable Long id){
-//		List agendadosBarbeiro = agendamentoService.agendamentoBarbeiro(id);
-//		return ResponseEntity.ok(agendadosBarbeiro);
-//	}
+	@GetMapping("/agendamento/clientes/{id}")
+	public ResponseEntity<List<ListaAgendamentosCliente>> listaAgendamentosClientes(@PathVariable Long id){
+		List agendamentoClientes = agendamentoService.agendamentosClientes(id);
+		return ResponseEntity.ok(agendamentoClientes);
+	}
 }

@@ -14,13 +14,13 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity authenticateUserException(Exception ex) {
 		ResponseError response = new ResponseError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
-		return ResponseEntity.internalServerError().body(response);
+		return ResponseEntity.status(500).body(response);
 	}
 
 	@ExceptionHandler(ValidaIdException.class)
 	public ResponseEntity validação(ValidaIdException ex){
 		ResponseError erro = new ResponseError(ex.getMessage(),HttpStatus.UNPROCESSABLE_ENTITY.value(),LocalDateTime.now());
-		return ResponseEntity.unprocessableEntity().body(erro);
+		return ResponseEntity.status(422).body(erro);
 	}
 
 	@ExceptionHandler(ValidaUsuarioException.class)
