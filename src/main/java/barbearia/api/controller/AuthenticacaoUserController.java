@@ -5,6 +5,7 @@ import barbearia.api.domain.dto.TokenJWT;
 import barbearia.api.domain.entity.Usuario;
 import barbearia.api.domain.service.TokenService;
 import barbearia.api.domain.service.ValidadorService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class AuthenticacaoUserController {
 	@Autowired
 	private ValidadorService validadorService;
 
+	@Operation(summary = "Serviço de authenticação do usuário")
 	@PostMapping
 	public ResponseEntity athenticaUser(@RequestBody @Valid DadosLogin dadosLogin) {
 

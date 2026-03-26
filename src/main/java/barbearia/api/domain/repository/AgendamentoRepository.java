@@ -19,4 +19,6 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
 			Long horario_id
 	);
 	List<Agendamento> findByCliente_Id(Long id);
+
+	List<Agendamento> findByBarbeiro_id(Long idd);
 }

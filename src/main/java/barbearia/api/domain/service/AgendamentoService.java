@@ -1,6 +1,7 @@
 package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.AgendamentoDTO;
+import barbearia.api.domain.dto.ListaAgendamentoBarbeiros;
 import barbearia.api.domain.dto.ListaAgendamentosCliente;
 import barbearia.api.domain.entity.*;
 import barbearia.api.domain.repository.*;
@@ -65,6 +66,19 @@ public class AgendamentoService {
 				.toList();
 
 		if(agendamentos.isEmpty()){
+			throw new ValidaUsuarioException("NAO POSSUI AGENDAMENTO!");
+		}else {
+			return agendamentos;
+		}
+	}
+
+	public List<ListaAgendamentoBarbeiros> agendamentosBarbeiro(Long id){
+		List<ListaAgendamentoBarbeiros> agendamentos = agendamentoRepository.findByBarbeiro_id(id)
+				.stream()
+				.map(ListaAgendamentoBarbeiros::new)
+				.toList();
+
+		if (agendamentos.isEmpty()){
 			throw new ValidaUsuarioException("NAO POSSUI AGENDAMENTO!");
 		}else {
 			return agendamentos;
