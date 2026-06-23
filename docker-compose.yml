@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    image: barbersystem:latest
+    container_name: barbersystem-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: ${URL_POSTGRES}
+      SPRING_DATASOURCE_USERNAME: ${USER_POSTGRES}
+      SPRING_DATASOURCE_PASSWORD: ${PASSWORD_POSTGRES}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    container_name: barbersystem-db
+    environment:
+      POSTGRES_DB: ${URL_POSTGRES}
+      POSTGRES_USER: ${USER_POSTGRES}
+      POSTGRES_PASSWORD: ${PASSWORD_POSTGRES}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
