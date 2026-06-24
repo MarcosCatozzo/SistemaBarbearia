@@ -2,7 +2,9 @@ package barbearia.api.domain.service;
 
 import barbearia.api.domain.dto.ListaHorarios;
 import barbearia.api.domain.entity.Horas;
+import barbearia.api.domain.repository.AgendamentoRepository;
 import barbearia.api.domain.repository.HorasRepository;
+import barbearia.api.infra.Exceptions.validadores.ValidaUsuarioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,18 @@ public class HorarioService {
 	@Autowired
 	public HorasRepository horasRepository;
 
-	public List<ListaHorarios> listaDeHorarios(){
+	public List<ListaHorarios> listaDeHorarios() {
 		List<ListaHorarios> listarHorarios = horasRepository.findAll()
 				.stream()
 				.map(ListaHorarios::new)
 				.toList();
 
 		return listarHorarios;
+	}
+
+	public Horas validaHorario(Long id) {
+		Horas horario = horasRepository.findById(id).
+				orElseThrow(() -> new ValidaUsuarioException("ID DO HORARIO NÃO LOCALIZADO!!"));
+		return horario;
 	}
 }

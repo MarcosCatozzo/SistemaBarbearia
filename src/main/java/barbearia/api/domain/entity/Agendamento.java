@@ -1,74 +1,97 @@
 package barbearia.api.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
+@Getter
+@Setter
 @Table(name = "agendamento")
 @EqualsAndHashCode(of = "id")
 public class Agendamento {
 
+	public Agendamento(){}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	public Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario_id")
-	private Usuario cliente;
+	@ManyToOne
+	@JoinColumn(name = "usuario_id", nullable = false)
+	public Usuario cliente;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "barbeiro_id")
-	private Barbeiro barbeiro;
+	@ManyToOne
+	@JoinColumn(name = "barbeiro_id", nullable = false)
+	public Usuario barbeiro;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "servico_id")
-	private Servico servico;
+	@ManyToOne
+	@JoinColumn(name = "servico_id", nullable = false)
+	public Servico servico;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dia_semana_id")
-	private DiaSemana diaDaSemana;
+	@ManyToOne
+	@JoinColumn(name = "diaSemana_id", nullable = false)
+	public DiaSemana diaSemana;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "horario_id")
-	private Horas horario;
+	@ManyToOne
+	@JoinColumn(name = "horario_id", nullable = false)
+	public Horas horario;
 
-	public Agendamento(){}
-
-	public Agendamento(Long id, Usuario usuario, Barbeiro barbeiro, Servico servico, DiaSemana diaDaSemana, Horas horario) {
+	public Agendamento( Long id, Usuario cliente, Usuario barbeiro, Servico servico, DiaSemana diaSemana, Horas horas) {
 		this.id = id;
-		this.cliente = usuario;
+		this.cliente = cliente;
 		this.barbeiro = barbeiro;
 		this.servico = servico;
-		this.diaDaSemana = diaDaSemana;
-		this.horario = horario;
+		this.diaSemana = diaSemana;
+		this.horario = horas;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Usuario getCliente() {
 		return cliente;
 	}
 
-	public Barbeiro getBarbeiro() {
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
+	}
+
+	public Usuario getBarbeiro() {
 		return barbeiro;
+	}
+
+	public void setBarbeiro(Usuario barbeiro) {
+		this.barbeiro = barbeiro;
 	}
 
 	public Servico getServico() {
 		return servico;
 	}
 
-	public DiaSemana getDiaDaSemana() {
-		return diaDaSemana;
+	public void setServico(Servico servico) {
+		this.servico = servico;
+	}
+
+	public DiaSemana getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(DiaSemana diaSemana) {
+		this.diaSemana = diaSemana;
 	}
 
 	public Horas getHorario() {
 		return horario;
 	}
+
+	public void setHorario(Horas horario) {
+		this.horario = horario;
+	}
+
 }

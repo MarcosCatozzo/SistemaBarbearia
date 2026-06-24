@@ -1,6 +1,6 @@
 package barbearia.api.domain.service;
 
-import barbearia.api.domain.entity.Barbeiro;
+//import barbearia.api.domain.entity.Barbeiro;
 import barbearia.api.domain.entity.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -35,19 +35,19 @@ public class TokenService {
 		}
 	}
 
-	public String gerarTokenBarber(Barbeiro login) {
-		try {
-			var algoritmo = Algorithm.HMAC256(SECRET);
-			return JWT.create()
-					.withIssuer(ISSUER)
-					.withSubject(login.getLogin())
-					.withClaim("id", login.getId())
-					.withExpiresAt(dataExpiracao())
-					.sign(algoritmo);
-		} catch (JWTCreationException exception) {
-			throw new RuntimeException("erro ao gerar token jwt", exception);
-		}
-	}
+//	public String gerarTokenBarber(Barbeiro login) {
+//		try {
+//			var algoritmo = Algorithm.HMAC256(SECRET);
+//			return JWT.create()
+//					.withIssuer(ISSUER)
+//					.withSubject(login.getLogin())
+//					.withClaim("id", login.getId())
+//					.withExpiresAt(dataExpiracao())
+//					.sign(algoritmo);
+//		} catch (JWTCreationException exception) {
+//			throw new RuntimeException("erro ao gerar token jwt", exception);
+//		}
+//	}
 
 	public String getSubject(String tokenJWT){
 		try {

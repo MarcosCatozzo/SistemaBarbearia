@@ -1,10 +1,12 @@
 package barbearia.api.domain.service;
 
+import barbearia.api.domain.Tipo;
 import barbearia.api.domain.dto.Email;
 import barbearia.api.domain.dto.ListaDeUsuariosDTO;
 import barbearia.api.domain.dto.UsuarioDTO;
 import barbearia.api.domain.entity.Usuario;
 import barbearia.api.domain.repository.UsuarioRepository;
+import barbearia.api.infra.Exceptions.validadores.ValidaUsuarioException;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,6 +35,12 @@ public class UsuarioService {
 
 			email.envioDeEmail(confirmaEmail);
 
+			if(usuario.getTipo() == Tipo.CLIENTE){
+				usuario.setTipo(Tipo.CLIENTE);
+			}else {
+				usuario.setTipo(Tipo.BARBEIRO);
+			}
+
 			usuarioRepository.save(usuario); //remover essa linha - usuario deve ser salvo após a confirmação do email...
 		} catch (MessagingException e) {
 			e.getMessage();
@@ -40,6 +48,18 @@ public class UsuarioService {
 	}
 	public List<ListaDeUsuariosDTO> listagemUsuarios() {
 		return usuarioRepository.findAll().stream().map(ListaDeUsuariosDTO::new).toList();
+	}
+
+	public Usuario validaUsuario(Long id){
+		Usuario cliente = usuarioRepository.findById(id)
+				.orElseThrow(() -> new ValidaUsuarioException("ID DO CLIENTE NÃO LOCALIZADO!! "));
+		return cliente;
+	}
+
+	public Usuario validaBarbeiro(Long id){
+		Usuario barbeiro = usuarioRepository.findById(id)
+				.orElseThrow(() -> new ValidaUsuarioException("ID DO BARBEIRO NÃO LOCALIZADO!! "));
+		return barbeiro;
 	}
 }
 

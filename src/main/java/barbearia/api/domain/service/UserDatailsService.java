@@ -1,6 +1,5 @@
 package barbearia.api.domain.service;
 
-import barbearia.api.domain.repository.BarbeiroRepository;
 import barbearia.api.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

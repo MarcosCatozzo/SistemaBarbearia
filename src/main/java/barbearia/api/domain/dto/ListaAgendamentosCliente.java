@@ -4,17 +4,18 @@ import barbearia.api.domain.entity.Agendamento;
 
 import java.time.LocalTime;
 
-public record ListaAgendamentosUsuario(
+public record ListaAgendamentosCliente(
 		String barbeiro,
 		String servico,
 		String diaSemana,
 		LocalTime horarioAgendado
 ) {
 
-	public ListaAgendamentosUsuario(Agendamento agendamento){
-		this(agendamento.getBarbeiro().getNome(),
+	public ListaAgendamentosCliente(Agendamento agendamento) {
+		this(
+				agendamento.getBarbeiro().getNome(),
 				agendamento.getServico().getNomeServico(),
-				agendamento.getDiaDaSemana().getDia(),
+				agendamento.getDiaSemana().getDia(),
 				agendamento.getHorario().getHorario());
 	}
 

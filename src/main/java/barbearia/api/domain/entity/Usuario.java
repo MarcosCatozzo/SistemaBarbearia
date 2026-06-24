@@ -1,5 +1,6 @@
 package barbearia.api.domain.entity;
 
+import barbearia.api.domain.Tipo;
 import barbearia.api.domain.dto.UsuarioDTO;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,14 +27,18 @@ public class Usuario implements UserDetails {
 	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "telefone")
-	private String telefone;
-
 	@Column(name = "email")
 	private String login;
 
+	@Column(name = "telefone")
+	private String telefone;
+
 	@Column(name = "senha")
 	private String senha;
+
+	@Column(name = "tipo")
+	@Enumerated(EnumType.STRING)
+	private Tipo tipo;
 
 
 	public Usuario(UsuarioDTO usuarioDTO) {
@@ -41,6 +46,7 @@ public class Usuario implements UserDetails {
 		this.login = usuarioDTO.login();
 		this.telefone = usuarioDTO.telefone();
 		this.senha = usuarioDTO.senha();
+		this.tipo = usuarioDTO.tipo();
 	}
 
 	public String getNome() {
@@ -62,8 +68,16 @@ public class Usuario implements UserDetails {
 	public Long getId(){
 		return id;
 	}
+
+	public Tipo getTipo(){
+		return this.tipo;
+	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public void setTipo(Tipo tipo){
+		this.tipo = tipo;
 	}
 
 	@Override

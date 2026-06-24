@@ -32,16 +32,12 @@ public class Servico {
 		this.status = servicosDto.status();
 	}
 
-	public String getNomeDoServico() {
+	public String getNomeServico() {
 		return nomeServico;
 	}
 
 	public Double getValorDoServico() {
 		return valorServico;
-	}
-
-	public Boolean getStatus(){
-		return status;
 	}
 
 	public Long getId() {

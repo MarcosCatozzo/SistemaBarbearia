@@ -1,11 +1,12 @@
 package barbearia.api.controller;
 
-import barbearia.api.domain.dto.BarbeiroDto;
+//import barbearia.api.domain.dto.BarbeiroDto;
 import barbearia.api.domain.dto.ServicosDto;
 import barbearia.api.domain.dto.UsuarioDTO;
-import barbearia.api.domain.service.BarbeiroService;
+//import barbearia.api.domain.service.BarbeiroService;
 import barbearia.api.domain.service.ServicoService;
 import barbearia.api.domain.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,23 +23,16 @@ public class CadastroController {
 	public UsuarioService usuarioService;
 
 	@Autowired
-	public BarbeiroService barbeiroService;
-
-	@Autowired
 	public ServicoService servicoService;
 
+	@Operation(summary = "Cadastra usuário no sistema")
 	@PostMapping("/usuario")
 	public ResponseEntity cadastraUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
 		usuarioService.salvaCadastroUsuario(usuarioDTO);
 		return ResponseEntity.noContent().build();
 	}
 
-	@PostMapping("/barbeiros")
-	public ResponseEntity cadastraBarbeiro(@RequestBody @Valid BarbeiroDto barbeiroDto) {
-		barbeiroService.salvaCadastroBarbeiro(barbeiroDto);
-		return ResponseEntity.noContent().build();
-	}
-
+	@Operation(summary = "Cadastra serviço no sistema")
 	@PostMapping("/servicos")
 	public ResponseEntity cadastraServiço(@RequestBody @Valid ServicosDto servicosDto) {
 		servicoService.cadastraServico(servicosDto);

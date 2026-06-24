@@ -1,5 +1,6 @@
 package barbearia.api.domain.repository;
 
+import barbearia.api.domain.Tipo;
 import barbearia.api.domain.dto.UsuarioDTO;
 import barbearia.api.domain.entity.Usuario;
 import jakarta.transaction.Transactional;
@@ -13,6 +14,8 @@ import java.util.Optional;
 @Transactional
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	UserDetails findByLogin(String login);
+	Usuario findByLogin(String login);
+
+	String findByTipo(Tipo tipo);
 
 }
