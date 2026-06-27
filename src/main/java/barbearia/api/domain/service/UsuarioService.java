@@ -7,7 +7,7 @@ import barbearia.api.domain.dto.UsuarioDTO;
 import barbearia.api.domain.entity.Usuario;
 import barbearia.api.domain.repository.UsuarioRepository;
 import barbearia.api.infra.Exceptions.validadores.ValidaUsuarioException;
-import jakarta.mail.MessagingException;
+//import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,20 +20,20 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	@Autowired
-	private EmailService email;
+//	@Autowired
+//	private EmailService email;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	public void salvaCadastroUsuario(UsuarioDTO usuarioDTO) {
-		try {
+//		try {
 			Usuario usuario = new Usuario(usuarioDTO);
 			usuario.setSenha(passwordEncoder.encode(usuarioDTO.senha()));
 
 			Email confirmaEmail = new Email(usuario.getLogin(), "Cadastro Realizado");
 
-			email.envioDeEmail(confirmaEmail);
+//			email.envioDeEmail(confirmaEmail);
 
 			if(usuario.getTipo() == Tipo.CLIENTE){
 				usuario.setTipo(Tipo.CLIENTE);
@@ -42,9 +42,9 @@ public class UsuarioService {
 			}
 
 			usuarioRepository.save(usuario); //remover essa linha - usuario deve ser salvo após a confirmação do email...
-		} catch (MessagingException e) {
-			e.getMessage();
-		}
+//		} catch (MessagingException e) {
+//			e.getMessage();
+//		}
 	}
 	public List<ListaDeUsuariosDTO> listagemUsuarios() {
 		return usuarioRepository.findAll().stream().map(ListaDeUsuariosDTO::new).toList();
