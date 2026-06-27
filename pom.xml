@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>barbearia</groupId>
 	<artifactId>api</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>api</name>
 	<description>Api rest da aplicação barbearia</description>
 	<url/>
@@ -82,10 +82,10 @@
 			<version>4.4.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-mail</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
